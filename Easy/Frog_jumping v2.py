@@ -1,4 +1,6 @@
+
 """
+
 A frog is currently at the point 0 on a coordinate axis Ox. It jumps by the following algorithm: the first jump is a units to the right, the second jump is b units to the left, the third jump is a units to the right, the fourth jump is b units to the left, and so on.
 
 Formally:
@@ -20,22 +22,62 @@ Output
 Print t integers. The i-th integer should be the answer for the i-th query.
 """
 import sys
+def main():
+	def read_tests():
+		while 1:
+			t = int(input())
+			if t >= 1 and t <= 1000:
+				return t
+			else:
+				return read_tests()
 
-#this function will help us find the new position of the frog
-def find_new_position(a, b, k):
-	#if all the moves are equal and the number of jumps is an even number the position will stay the same 
-	if k % 2 == 0:
-			return (a * (k//2)) - (b * (k//2))	
+	def verify(x):
+		r = range(1, 10**9+1)
+		if x not in r:
+			return False
+		else:
+			return True
 
-	#the same except the number of jumps is an odd number
-	elif k % 2 == 1:
-			return (a * (k//2)) - (b * (k//2)) + a
+	def inputs():
+			 dict={}
+			 a, b, k = map(int, sys.stdin.readline().split())
+			 if verify(a) and verify(b) and verify(k):
+			 	return {'a': a, 'b': b, 'k': k}
+			 else:
+			 	return inputs()
 
-t = int(input())
+	def find_new_position(a, b, k):
+		    val = 0
+		    if a == b and k % 2 == 0:
+		        return 0
+		    elif a == b and k % 2 == 1:
+		    	return 1
+		    else:
+		    	if k % 2 == 1: 
+		    		val = (a * (k//2)) - (b * (k//2)) + a
+		    	else:
+		    		val = (a * k//2) - (b * k//2)
+		    	return val
 
-#for each test will figure out the new positions of the frogs :)
-for i in range(t):	
-	a, b, k = map(int, sys.stdin.readline().split())   	
-	x = find_new_position(a,b,k)
-	sys.stdout.write(str(x))
-	sys.stdout.write('\n')
+
+	t = read_tests()
+
+	def exec():
+		input_dict = inputs()
+		a = input_dict.get('a')
+		b = input_dict.get('b')
+		k = input_dict.get('k')
+		x = find_new_position(a,b,k)
+		sys.stdout.write(str(x))
+		sys.stdout.write('\n')
+
+
+	res = {exec() for i in range(t)}
+		
+main()
+
+
+
+
+		
+
