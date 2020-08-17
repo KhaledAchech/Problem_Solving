@@ -23,23 +23,15 @@ Print such string s that after encryption it equals t.
 #inputs
 n = int(input())
 t = input()
- 
 s =''
+#initialize position 
+pos = 0
+#initialize iterator value 
 i = 0
-while i < len(t):
-	x = len(t[i]*(i+1))
-	if x == 1:
-		s += t[i]
-		i += 1
-		pass
-	if x == i+1:
-		s += t[i]
-		i = i + x
- 
-s_crypt=''
-for i in range(len(s)):
-	s_crypt += s[i]*(i+1)
- 
-if (s_crypt==t):
-	print(s) 
- 
+#decrypting the string 
+while i+pos <= n:
+	s += t[i]
+	pos += 1
+	i += pos 
+
+print(s)
