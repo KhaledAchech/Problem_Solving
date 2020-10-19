@@ -17,6 +17,15 @@ t = int(input())
 
 for i in range(t):
 	a, b = map(str, sys.stdin.readline().lower().split())
-	
+	cnt = 0
+	if len(a) > len(b) :
+		for i in range(len(b)):
+			if b[i] in a:
+				cnt += 1
+	else:
+		for i in range(len(a)):
+			if a[i] in a:
+				cnt += 1
+	print(cnt)
 	
 
